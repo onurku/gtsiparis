@@ -1,0 +1,18 @@
+﻿@model  gtsiparis.Models.SiparisMenuView
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="col-md-3">
+        <p></p>
+        @foreach (var item in Model.KategoriItems)
+        {
+                <p> @Html.ActionLink(item.KategoriAdi, "UrunListesi", "Genel", new { id = item.Id, page=1 }, new { @class = "btn btn-primary btn-large" }) </p>
+        }
+    </div>
+    <div class="col-md-9">
+        @RenderBody()
+    </div>
+</div>

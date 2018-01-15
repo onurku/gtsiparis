@@ -1,0 +1,106 @@
+﻿@model gtsiparis.Urun
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Urun</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Birim.BirimAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Birim.BirimAdi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Grup.GrupAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Grup.GrupAdi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kategori.KategoriAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kategori.KategoriAdi)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Adi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Aciklama)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aciklama)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Maliyet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Maliyet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fiyat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fiyat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Baslangic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Baslangic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bitis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bitis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Aktif)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aktif)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RowVersion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RowVersion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

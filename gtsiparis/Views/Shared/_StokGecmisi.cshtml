@@ -1,0 +1,43 @@
+﻿@model IEnumerable<gtsiparis.Stok>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Miktar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GirdiCikti)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tarih)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Miktar)
+        </td>
+        <td>
+            @if (item.GirdiCikti == true)
+            {
+                <img src="@Url.Content("~/Gorsel/up.png")" />
+            }
+            else
+            {
+                <img src="@Url.Content("~/Gorsel/down.png")" />
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tarih)
+        </td>
+    </tr>
+}
+    <tr>
+        <td></td>
+        <td>Son Stok  =></td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.LastOrDefault().SonStok)
+        </td>
+    </tr>
+</table>

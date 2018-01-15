@@ -1,0 +1,21 @@
+﻿@model gtsiparis.Urun
+
+<div class="row">
+    <div class="col-sm-6">
+        <span class="border border-primary">Ürünün Adı:</span>@Html.DisplayFor(model => model.Adi)<br />
+        <span class="border border-primary">Üretildiği Bölge :</span> @Html.DisplayFor(model => model.UretimBolge)<br />
+        <span class="border border-primary">Fiyatı :</span> @Html.DisplayFor(model => model.Fiyat)<br />
+        <span class="border border-primary">Stokta Kalan :</span> @Html.DisplayFor(model => model.Stok.SonStok) <br />
+    </div>
+    <div class="col-sm-4">Resim Gelecek</div>
+    <div class="col-sm-2">
+        <div class="SiparisEkle">
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Sepete Ekle", "UrunGosterDetay", "Genel", new { id = Model.Id }, new { @class = "btn btn-default" })</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+

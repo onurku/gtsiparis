@@ -1,0 +1,58 @@
+﻿@model gtsiparis.Urun
+<div id="showErrorMessage"></div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container" id="SiparisEkleForm">
+        <h4>Urun</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Adi)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Adi)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Birim.BirimAdi)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Birim.BirimAdi)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Grup.GrupAdi)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Grup.GrupAdi)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Kategori.KategoriAdi)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Kategori.KategoriAdi)
+            </dd>
+            <dt>
+                Sipariş Miktarı22
+            </dt>
+            <dd>
+                <div class="form-group">
+                    <span class="input-group-addon" id="basic-addon1">@Html.DisplayFor(model => model.Birim.BirimAdi)</span>
+                    @Html.TextBox("SiparisMiktari", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </dd>
+            <dt></dt>
+            <dd>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-6">
+                        @Html.ActionLink("Siparişi Sepete Ekle", "SiparisiSepeteEkle", "Genel", new { id = Model.Id })
+                    </div>
+                </div>
+            </dd>
+        </dl>
+    </div>
+}
+@*<p>
+    @Html.ActionLink("Siparişi Sepete Ekle", "Edit","Genel", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@

@@ -1,0 +1,67 @@
+﻿@model gtsiparis.Kategori
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Kategori</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Grup.GrupAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Grup.GrupAdi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kullanici.Adi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kullanici.Adi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lokasyon.LokasyonAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lokasyon.LokasyonAdi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KategoriAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KategoriAdi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Aktif)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aktif)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedTime)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

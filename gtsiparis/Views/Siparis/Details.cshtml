@@ -1,0 +1,67 @@
+﻿@model gtsiparis.Siparis
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Siparis</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Kullanici.Adi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kullanici.Adi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Urun.Adi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Urun.Adi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Miktar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Miktar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tarih)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tarih)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Onay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Onay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Iade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Iade)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

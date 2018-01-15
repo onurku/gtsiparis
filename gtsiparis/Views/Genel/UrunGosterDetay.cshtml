@@ -1,0 +1,96 @@
+﻿@model gtsiparis.Urun
+@{
+    ViewBag.Title = "UrunGosterDetay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sipariş miktarını giriniz...</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id, htmlAttributes: new { @id = "UrunId" })
+    <div class="container">
+        <div class="col-md-4">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Adi)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Adi)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Aciklama)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Aciklama)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Grup.GrupAdi)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Grup.GrupAdi)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Kategori.KategoriAdi)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Kategori.KategoriAdi)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Fiyat)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Fiyat)
+                </dd>
+                <dt>
+                    Sipariş Miktarı
+                </dt>
+                <dd>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1" style="width:60px" >@Html.DisplayFor(model => model.Birim.BirimAdi)</span>
+                        @Html.TextBox("SiparisMiktari", null, htmlAttributes: new { @class = "form-control" , @id="SipMik" })
+                    </div>
+                </dd>
+                <dt></dt>
+                <dd>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-6">
+                            <br/>
+                            <input type="button" id="btnGet" value="Sepete Ekle" class="btn btn-default" />
+                        </div>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+     
+    </div>
+}
+@section scripts {
+<script type="text/javascript">
+
+            $("#btnGet").click(function () {
+               
+                var urunId = $("#UrunId").val();
+                var Sipmik = $("#SipMik").val();
+                $.ajax({
+                    type: "POST",
+                    url: "/Genel/SiparisiSepeteEkle",
+                    data: JSON.stringify({ 'UrunId': urunId, 'SipMik': Sipmik }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        alert("Siparişiniz başarılı ile eklenmiştir.")
+                        window.location.href = data;
+                    }
+                });
+            });
+</script>
+}
+
+
+
+ 
+

@@ -1,0 +1,42 @@
+﻿@model gtsiparis.Models.SiparisMenuView
+@{
+    ViewBag.Title = "SagMenu";
+    Layout = "~/Views/Shared/_SiparisKategorileri.cshtml";
+    
+}
+@foreach (var item in Model.UrunItems)
+{
+        <hr class="divider">
+        @Html.Partial("_UrunGoster", item)    
+}
+@if (Model.Pager.EndPage > 1)
+{
+    <ul class="pagination">
+        @if (Model.Pager.CurrentPage > 1)
+        {
+            <li>
+                <a href="~/Genel/UrunListesi/@(Model.UrunItems.FirstOrDefault().Kategori_Id)?page=1">İlk @(Model.UrunItems.FirstOrDefault().Kategori.KategoriAdi)</a>
+            </li>
+            <li>
+                <a href="~/Genel/UrunListesi/@(Model.UrunItems.FirstOrDefault().Kategori_Id)?page=@(Model.Pager.CurrentPage - 1)"><<</a>
+            </li>
+        }
+
+        @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+        {
+            <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
+                <a href="~/Genel/UrunListesi/@(Model.UrunItems.FirstOrDefault().Kategori_Id)?page=@page">@page</a>
+            </li>    }
+
+        @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+        {
+            <li>
+                <a href="~/Genel/UrunListesi/@(Model.UrunItems.FirstOrDefault().Kategori_Id)?page=@(Model.Pager.CurrentPage + 1)">>></a>
+            </li>
+            <li>
+                <a href="~/Genel/UrunListesi/@(Model.UrunItems.FirstOrDefault().Kategori_Id)?page=@(Model.Pager.TotalPages)">Son @(Model.UrunItems.FirstOrDefault().Kategori.KategoriAdi)</a>
+            </li>
+        }
+    </ul>
+}
+			

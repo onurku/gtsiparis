@@ -1,0 +1,35 @@
+﻿@model gtsiparis.Ilce
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ilce</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IL.ILAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IL.ILAdi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IlceAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IlceAdi)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
