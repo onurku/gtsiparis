@@ -80,11 +80,14 @@ namespace gtsiparis.Controllers
         public ActionResult SiparisiSepeteEkle(int UrunId, decimal SipMik)
         {
             var userId = User.Identity.GetUserId();
+            decimal urunFiyat = db.Urun.Find(UrunId).Fiyat;
             Siparis sparis = new Siparis
             {
                 Kullanici_Id = userId,
                 Miktar = SipMik,
                 Urun_Id = UrunId,
+                Tutar = urunFiyat* SipMik,
+                BirimFiyat =urunFiyat,
                 Tarih = DateTime.Now
             };
  
@@ -99,6 +102,21 @@ namespace gtsiparis.Controllers
             var userId = User.Identity.GetUserId();
             ViewBag.Miktar = (from b in db.Siparis where b.Kullanici_Id == userId select b).Count();
             return PartialView("_SiparisSepet");
+        }
+
+        public ActionResult SiparisleriGetir()
+        {
+            var userId = User.Identity.GetUserId();
+            IEnumerable<Siparis> SiparisListesi;
+            SiparisListesi = (from b in db.Siparis where b.Kullanici_Id == userId select b).ToList();
+           
+            return View(SiparisListesi);
+        }
+
+        public ActionResult SiparisleriOnayla()
+        {
+
+            return View();
         }
     }
 }

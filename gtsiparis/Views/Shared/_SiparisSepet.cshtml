@@ -1,5 +1,5 @@
 ﻿@if (Request.IsAuthenticated)
 {
-    <button type="button" class="btn btn-primary">Sepet <span class="badge">@ViewBag.Miktar</span></button>
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("SiparisleriGetir", "Genel")'" >Sepet <span class="badge">@ViewBag.Miktar</span></button>
 }
 

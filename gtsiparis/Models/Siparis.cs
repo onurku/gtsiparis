@@ -15,6 +15,10 @@
 
         public decimal Miktar { get; set; }
 
+        public decimal Tutar { get; set; }
+
+        public decimal BirimFiyat { get; set; }
+
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Column(TypeName = "datetime2")]
         public DateTime Tarih { get; set; }

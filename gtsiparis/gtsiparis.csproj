@@ -243,6 +243,14 @@
     <Compile Include="Migrations\201801151405051_cascadedelete.Designer.cs">
       <DependentUpon>201801151405051_cascadedelete.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801181613210_SipariseTutarEklendi.cs" />
+    <Compile Include="Migrations\201801181613210_SipariseTutarEklendi.Designer.cs">
+      <DependentUpon>201801181613210_SipariseTutarEklendi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801181650278_SipariseBirimFiyatEklendi.cs" />
+    <Compile Include="Migrations\201801181650278_SipariseBirimFiyatEklendi.Designer.cs">
+      <DependentUpon>201801181650278_SipariseBirimFiyatEklendi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Birim.cs" />
@@ -504,6 +512,7 @@
     <Content Include="Views\Genel\UrunGosterDetay.cshtml" />
     <Content Include="Views\Genel\UrunListesi.cshtml" />
     <Content Include="Views\Shared\_SiparisSepet.cshtml" />
+    <Content Include="Views\Genel\SiparisleriGetir.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -541,6 +550,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801151405051_cascadedelete.resx">
       <DependentUpon>201801151405051_cascadedelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801181613210_SipariseTutarEklendi.resx">
+      <DependentUpon>201801181613210_SipariseTutarEklendi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801181650278_SipariseBirimFiyatEklendi.resx">
+      <DependentUpon>201801181650278_SipariseBirimFiyatEklendi.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

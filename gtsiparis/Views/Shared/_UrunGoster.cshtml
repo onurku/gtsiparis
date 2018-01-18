@@ -2,18 +2,48 @@
 
 <div class="row">
     <div class="col-sm-6">
-        <span class="border border-primary">Ürünün Adı:</span>@Html.DisplayFor(model => model.Adi)<br />
-        <span class="border border-primary">Üretildiği Bölge :</span> @Html.DisplayFor(model => model.UretimBolge)<br />
-        <span class="border border-primary">Fiyatı :</span> @Html.DisplayFor(model => model.Fiyat)<br />
-        <span class="border border-primary">Stokta Kalan :</span> @Html.DisplayFor(model => model.Stok.SonStok) <br />
+        <table class="table-hover">
+            <tr>
+                <th>
+                    <span style="font-weight:bold">Ürünün Adı:</span>
+                </th>
+                <th>
+                    @Html.DisplayFor(model => model.Adi)
+                </th> 
+            </tr>
+
+            <tr>
+                <th>
+                    <span style="font-weight:bold">Üretildiği Bölge :</span>
+                </th>
+                <th>
+                    @Html.DisplayFor(model => model.UretimBolge)
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <span style="font-weight:bold">Fiyatı :</span>
+                </th>
+                <th>
+                    @Html.DisplayFor(model => model.Fiyat)
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <span style="font-weight:bold">Stokta Kalan :</span>
+                </th>
+                <th>
+                    @Html.DisplayFor(model => model.Stok.SonStok)
+                </th>
+            </tr>
+        </table>
+
     </div>
     <div class="col-sm-4">Resim Gelecek</div>
     <div class="col-sm-2">
         <div class="SiparisEkle">
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Sepete Ekle", "UrunGosterDetay", "Genel", new { id = Model.Id }, new { @class = "btn btn-default" })</li>
-                </ul>
+                    @Html.ActionLink("Sepete Ekle", "UrunGosterDetay", "Genel", new { id = Model.Id }, new { @class = "btn btn-default" })
             </div>
         </div>
     </div>

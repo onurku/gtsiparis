@@ -1,0 +1,73 @@
+﻿@model IEnumerable<gtsiparis.Siparis>
+
+@{
+    ViewBag.Title = "SiparisleriGetir";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Siparişlerin aşağıda listelenmiştir. </h2>
+
+<p>
+    @Html.ActionLink("Sipariş Ver", "UrunListesi", "Genel", new { id = 14, page = 1 }, null)
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Urun.Adi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Miktar)
+        </th>
+        <th>
+            Birim Fiyatı
+        </th>
+        <th>
+            Tutar
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tarih)
+        </th>
+        <th></th>
+    </tr>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Urun.Adi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Miktar) @Html.DisplayFor(modelItem => item.Urun.Birim.BirimAdi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BirimFiyat) ₺
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tutar) ₺
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tarih)
+        </td>
+        <td>
+            @Html.ActionLink("Değiştir", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Sil", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+    <tr>
+        <td/><td><span style="font-weight:bold">Toplam =></span>
+        </td>
+        <td>
+            @Model.Sum(x => x.Tutar) ₺
+        </td>
+        <td/>
+    </tr>
+    <tr>
+        <td />
+        <td />
+        <td />
+        <td />
+        <td>
+            <p> @Html.ActionLink("Siparişini Onayla", "SiparisleriOnayla", "Genel", null, new { @class = "btn btn-primary btn-large" }) </p>
+        </td>
+    </tr>
+
+</table>
