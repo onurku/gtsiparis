@@ -25,6 +25,7 @@ namespace gtsiparis
                       "~/Scripts/bootstrap-datepicker.js",
                       "~/Scripts/DatePickerReady.js",
                       "~/Scripts/locales/bootstrap-datepicker.tr.min.js",
+                      "~/Scripts/jquery.magnific-popup.js",
                       "~/Scripts/respond.js"));
 
 
@@ -32,6 +33,7 @@ namespace gtsiparis
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap-datepicker.css",
                       "~/Content/site.css",
+                      "~/Content/magnific-popup.css",
                       "~/Content/jquery-ui.min.css"));
         }
     }

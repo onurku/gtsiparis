@@ -4117,11 +4117,11 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 @media (min-width: 768px) {
-  .navbar-collapse {
-    width: auto;
-    border-top: 0;
-    box-shadow: none;
-  }
+    .navbar-collapse {
+        width: auto;
+        border-top: 5px solid black;
+        box-shadow: none;
+    }
   .navbar-collapse.collapse {
     display: block !important;
     height: auto !important;
@@ -4501,8 +4501,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse {
-  background-color: #222222;
-  border-color: #080808;
+    background-color: #3B0B17;
+    border-color: #080808;
 }
 
 .navbar-inverse .navbar-brand {

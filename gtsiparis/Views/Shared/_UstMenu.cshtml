@@ -13,9 +13,9 @@
             <li>@Html.ActionLink("Anasayfa", "Index", "Home")</li>
             <li>@Html.ActionLink("Hakkımızda", "About", "Home")</li>
             <li>@Html.ActionLink("İletişim", "Contact", "Home")</li>
-            <li>@Html.ActionLink("Sipariş Ver", "UrunListesi", "Genel", new { id = 14, page=1 }, null)</li>
             @if (Request.IsAuthenticated)
             {
+            <li>@Html.ActionLink("Sipariş Ver", "UrunListesi", "Genel", new { id = 14, page=1 }, null)</li>
             <li>
                 <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
@@ -32,10 +32,13 @@
                 </div>
             </li>
             <li>
-                @Html.Action("Sepet", "Genel")
+                @Html.Action("Sepet", "Genel", new { @id = "popup" })
             </li>
             }
 </ul>
         @Html.Partial("_LoginPartial")
     </div>
+
+
+
 
