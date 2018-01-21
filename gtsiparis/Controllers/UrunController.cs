@@ -7,6 +7,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using gtsiparis;
+using PagedList;
+using PagedList.Mvc;
+using gtsiparis.Models;
 
 namespace gtsiparis.Controllers
 {
@@ -14,14 +17,25 @@ namespace gtsiparis.Controllers
     {
         private Model1 db = new Model1();
 
-        // GET: Urun 
-        public ActionResult Index()
+        // GET: Urun
+        public ActionResult Index(int page)
         {
-            //var urun = db.Urun.Include(u => u.Birim).Include(u => u.Grup).Include(u => u.Kategori).Include(u => u.Sorumlu).Include(u => u.Uretici);
-            var urun = (from m in db.Urun where m.Aktif ==true 
-                       select m).Include(u => u.Birim).Include(u => u.Grup).Include(u => u.Kategori).Include(u => u.Sorumlu).Include(u => u.Uretici);
-            return View(urun.ToList());
+            var pager = new Pager(1, page);
+            var urun = (from m in db.Urun
+                        where m.Aktif == true
+                        select m).Include(u => u.Birim).Include(u => u.Grup).Include(u => u.Kategori).Include(u => u.Sorumlu).Include(u => u.Uretici);
+
+            pager = new Pager(urun.Count(), page);
+            UrunListe viewModel = new UrunListe
+            {
+                UrunListesi = urun.OrderBy(x => x.Id).ToPagedList(page, 5).ToList(),
+                Pager = pager
+            };
+            Session["Lastpager"] = page;
+            return View(viewModel);
         }
+
+
 
         // GET: Urun/Details/5
         public ActionResult Details(int? id)
@@ -44,8 +58,8 @@ namespace gtsiparis.Controllers
             ViewBag.Birim_Id = new SelectList(db.Birim, "Id", "BirimAdi");
             ViewBag.Grup_Id = new SelectList(db.Grup, "Id", "GrupAdi");
             ViewBag.Kategori_Id = new SelectList(db.Kategori, "Id", "KategoriAdi");
-            ViewBag.Sorumlu_Id = new SelectList(db.Users, "Id", "AdSoyad");
-            ViewBag.Uretici_Id = new SelectList(db.Users, "Id", "AdSoyad");
+            ViewBag.StokId = new SelectList(db.Stok, "Id", "Id");
+
             return View();
         }
 
@@ -54,38 +68,19 @@ namespace gtsiparis.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Adi,Aciklama,Maliyet,Fiyat,Baslangic,Bitis,Aktif,Birim_Id,Grup_Id,Kategori_Id,Sorumlu_Id,Uretici_Id,RowVersion")] Urun urun , decimal StokMiktari)
+        public ActionResult Create([Bind(Include = "Id,Adi,Aciklama,Maliyet,Fiyat,Mesafe,AlinacakLokasyon,UretimBolge,Baslangic,Bitis,Aktif,Birim_Id,StokId,Grup_Id,Kategori_Id,Sorumlu_Id,Uretici_Id,UrunGorseli,RowVersion")] Urun urun)
         {
-            Stok stok = new Stok
-            {
-                GirdiCikti = true,
-                Miktar = StokMiktari,
-                SonStok = StokMiktari,
-                Tarih = DateTime.Now
-            };
-            
-
             if (ModelState.IsValid)
             {
-                
                 db.Urun.Add(urun);
                 db.SaveChanges();
-                stok.UrunId = urun.Id;
-                db.Stok.Add(stok);
-                db.SaveChanges();
-                urun.StokId = stok.Id;
-                urun.Stok = stok;
-                //
-                db.Entry(urun).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { page = Session["Lastpager"] });
             }
-
+           
             ViewBag.Birim_Id = new SelectList(db.Birim, "Id", "BirimAdi", urun.Birim_Id);
             ViewBag.Grup_Id = new SelectList(db.Grup, "Id", "GrupAdi", urun.Grup_Id);
             ViewBag.Kategori_Id = new SelectList(db.Kategori, "Id", "KategoriAdi", urun.Kategori_Id);
-            ViewBag.Sorumlu_Id = new SelectList(db.Users, "Id", "AdSoyad", urun.Sorumlu_Id);
-            ViewBag.Uretici_Id = new SelectList(db.Users, "Id", "AdSoyad", urun.Uretici_Id);
+            ViewBag.StokId = new SelectList(db.Stok, "Id", "Id", urun.StokId);
             return View(urun);
         }
 
@@ -101,12 +96,14 @@ namespace gtsiparis.Controllers
             {
                 return HttpNotFound();
             }
-          
+
+           
             ViewBag.Birim_Id = new SelectList(db.Birim, "Id", "BirimAdi", urun.Birim_Id);
             ViewBag.Grup_Id = new SelectList(db.Grup, "Id", "GrupAdi", urun.Grup_Id);
             ViewBag.Kategori_Id = new SelectList(db.Kategori, "Id", "KategoriAdi", urun.Kategori_Id);
-            ViewBag.Sorumlu_Id = new SelectList(db.Users, "Id", "AdSoyad", urun.Sorumlu_Id);
+            ViewBag.Sorumlu_Id = new SelectList(db.Users, "Id", "AdSoyad", urun.Kategori_Id);
             ViewBag.Uretici_Id = new SelectList(db.Users, "Id", "AdSoyad", urun.Uretici_Id);
+            ViewBag.StokId = new SelectList(db.Stok, "Id", "Id", urun.StokId);
             return View(urun);
         }
 
@@ -115,19 +112,22 @@ namespace gtsiparis.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Adi,Aciklama,Maliyet,Fiyat,Baslangic,Bitis,Aktif,Birim_Id,Grup_Id,Kategori_Id,Sorumlu_Id,Uretici_Id,RowVersion")] Urun urun)
+        public ActionResult Edit([Bind(Include = "Id,Adi,Aciklama,Maliyet,Fiyat,Mesafe,AlinacakLokasyon,UretimBolge,Baslangic,Bitis,Aktif,Birim_Id,StokId,Grup_Id,Kategori_Id,Sorumlu_Id,Uretici_Id,UrunGorseli,RowVersion")] Urun urun)
         {
+
             if (ModelState.IsValid)
             {
                 db.Entry(urun).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //int a = (from o in db.Urun where o.Id == urun.Id select o).
+                return RedirectToAction("Index", new { page = Session["Lastpager"] });
             }
             ViewBag.Birim_Id = new SelectList(db.Birim, "Id", "BirimAdi", urun.Birim_Id);
             ViewBag.Grup_Id = new SelectList(db.Grup, "Id", "GrupAdi", urun.Grup_Id);
             ViewBag.Kategori_Id = new SelectList(db.Kategori, "Id", "KategoriAdi", urun.Kategori_Id);
-            ViewBag.Sorumlu_Id = new SelectList(db.Users, "Id", "AdSoyad", urun.Sorumlu_Id);
+            ViewBag.Sorumlu_Id = new SelectList(db.Users, "Id", "AdSoyad", urun.Kategori_Id);
             ViewBag.Uretici_Id = new SelectList(db.Users, "Id", "AdSoyad", urun.Uretici_Id);
+            ViewBag.StokId = new SelectList(db.Stok, "Id", "Id", urun.StokId);
             return View(urun);
         }
 
@@ -154,16 +154,14 @@ namespace gtsiparis.Controllers
             Urun urun = db.Urun.Find(id);
             db.Urun.Remove(urun);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { page = Session["Lastpager"] });
         }
-
         public ActionResult StoklariGoster(int id)
         {
             IEnumerable<Stok> StokListe;
             StokListe = (from b in db.Stok where b.UrunId == id select b).ToList();
             return PartialView("_StokGecmisi", StokListe);
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

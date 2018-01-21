@@ -255,6 +255,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Birim.cs" />
     <Compile Include="Models\C__MigrationHistory.cs" />
+    <Compile Include="Models\Genel.cs" />
     <Compile Include="Models\Grup.cs" />
     <Compile Include="Models\GrupIndeksi.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -499,11 +500,6 @@
     <Content Include="Views\Stok\Details.cshtml" />
     <Content Include="Views\Stok\Edit.cshtml" />
     <Content Include="Views\Stok\Index.cshtml" />
-    <Content Include="Views\Urun\Create.cshtml" />
-    <Content Include="Views\Urun\Delete.cshtml" />
-    <Content Include="Views\Urun\Details.cshtml" />
-    <Content Include="Views\Urun\Edit.cshtml" />
-    <Content Include="Views\Urun\Index.cshtml" />
     <Content Include="Views\Shared\_SiparisEkle.cshtml" />
     <Content Include="Views\Shared\_SiparisKategorileri.cshtml" />
     <Content Include="Views\Shared\_StokGecmisi.cshtml" />
@@ -513,6 +509,11 @@
     <Content Include="Views\Genel\UrunListesi.cshtml" />
     <Content Include="Views\Shared\_SiparisSepet.cshtml" />
     <Content Include="Views\Genel\SiparisleriGetir.cshtml" />
+    <Content Include="Views\Urun\Create.cshtml" />
+    <Content Include="Views\Urun\Delete.cshtml" />
+    <Content Include="Views\Urun\Details.cshtml" />
+    <Content Include="Views\Urun\Edit.cshtml" />
+    <Content Include="Views\Urun\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

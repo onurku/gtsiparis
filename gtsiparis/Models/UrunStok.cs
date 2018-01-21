@@ -5,7 +5,7 @@ using System.Web;
 
 namespace gtsiparis.Models
 {
-    public class UrunStok
+    public class Uruntok
     {
         public Urun Urun { get; set; }
         public Stok Stok { get; set; }

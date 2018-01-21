@@ -10,7 +10,6 @@
     [Table("gtadmin.Urun")]
     public partial class Urun
     {
-        internal object id;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Urun()
