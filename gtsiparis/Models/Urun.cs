@@ -31,7 +31,7 @@
         [DataType(DataType.Currency)]
         public decimal Fiyat { get; set; }
 
-        [DisplayName("Açıklama")]
+        [DisplayName("Mesafe")]
         public int? Mesafe { get; set; }
 
         [DisplayName("Alınacak Lokasyon")]

@@ -47,8 +47,9 @@
             @Html.DisplayFor(modelItem => item.Tarih)
         </td>
         <td>
-            @Html.ActionLink("Değiştir", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Sil", "Delete", new { id=item.Id })
+            @*@Html.ActionLink("Değiştir", "Edit", new { id=item.Id })*@ 
+            @Html.ActionLink("Güncelle", "UrunGosterDetay", "Genel", new { id = item.Urun_Id, SipMik=item.Miktar }, new { @class = "btn btn-default" })
+| @Html.ActionLink("Sil", "Delete", new { id=item.Id })
         </td>
     </tr>
 }

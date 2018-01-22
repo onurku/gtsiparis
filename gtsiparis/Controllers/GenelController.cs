@@ -45,6 +45,7 @@ namespace gtsiparis.Controllers
                 
             }
             pager = new Pager(UrunListesi.Count(), page);
+            Session["Lastpager"] = page;
             SiparisMenuView viewModel = new SiparisMenuView
             {
                 KategoriItems = db.Kategori.ToList(),
@@ -66,9 +67,14 @@ namespace gtsiparis.Controllers
         }
 
         
-        public ActionResult UrunGosterDetay(int id)
+        public ActionResult UrunGosterDetay(int id, decimal SipMik)
         {
             Urun Urun1 = db.Urun.Find(id);
+            if (!SipMik.Equals(null))
+            {
+                ViewBag.SipMik = SipMik;
+            }
+            else { ViewBag.SipMik = 0; }
             if (Urun1 == null)
             {
                 return HttpNotFound();
@@ -80,21 +86,36 @@ namespace gtsiparis.Controllers
         public ActionResult SiparisiSepeteEkle(int UrunId, decimal SipMik)
         {
             var userId = User.Identity.GetUserId();
+            Urun urun = db.Urun.Find(UrunId);
             decimal urunFiyat = db.Urun.Find(UrunId).Fiyat;
-            Siparis sparis = new Siparis
+            Siparis siparis = (from b in db.Siparis where (b.Urun_Id == UrunId && b.Kullanici_Id == userId) select b).FirstOrDefault();
+            if (siparis.Id ==null)
             {
-                Kullanici_Id = userId,
-                Miktar = SipMik,
-                Urun_Id = UrunId,
-                Tutar = urunFiyat* SipMik,
-                BirimFiyat =urunFiyat,
-                Tarih = DateTime.Now
-            };
+                Siparis sparis = new Siparis
+                {
+                    Kullanici_Id = userId,
+                    Miktar = SipMik,
+                    Urun_Id = UrunId,
+                    Tutar = urun.Fiyat * SipMik,
+                    BirimFiyat = urunFiyat,
+                    Tarih = DateTime.Now
+                };
+                db.Siparis.Add(sparis);
+            }
+         
  
-            db.Siparis.Add(sparis);
+            
             db.SaveChanges();
             ViewData["msg"] = "Siparişiniz başarıyla eklenmiştir. ";
-            return Json(Url.Action("UrunListesi", "Genel", new {id = 14,page=1 }));
+            if(SipMik == 0)
+            {
+                return Json(Url.Action("UrunListesi", "Genel", new { id = urun.Kategori_Id, page = Session["Lastpager"] }));
+            }
+            else
+            {
+                return Json(Url.Action("SiparisleriGetir", "Genel"));
+            }
+            
         }
 
         public ActionResult Sepet()

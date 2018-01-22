@@ -51,7 +51,7 @@
                 <dd>
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1" style="width:60px" >@Html.DisplayFor(model => model.Birim.BirimAdi)</span>
-                        @Html.TextBox("SiparisMiktari", null, htmlAttributes: new { @class = "form-control" , @id="SipMik" })
+                        @Html.TextBox("SiparisMiktari", (decimal)ViewBag.SipMik , htmlAttributes: new { @class = "form-control" , @id="SipMik" })
                     </div>
                 </dd>
                 <dt></dt>
@@ -68,6 +68,9 @@
      
     </div>
 }
+<p>
+    @Html.ActionLink("Listeye Geri Dön", "UrunListesi", "Genel", new { id = Model.Kategori_Id, page = Session["Lastpager"] }, null)
+</p>
 @section scripts {
 <script type="text/javascript">
 
