@@ -10,4 +10,10 @@ namespace gtsiparis.Models
             public IEnumerable<Urun> UrunListesi { get; set; }
             public Pager Pager { get; set; }
         }
+
+        public class SiparisUrun
+        {
+            public Urun Urun { get; set; }
+            public string Mod { get; set; }
+        }
 }

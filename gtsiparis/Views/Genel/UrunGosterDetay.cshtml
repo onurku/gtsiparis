@@ -81,7 +81,8 @@
                 $.ajax({
                     type: "POST",
                     url: "/Genel/SiparisiSepeteEkle",
-                    data: JSON.stringify({ 'UrunId': urunId, 'SipMik': Sipmik }),
+                    data: JSON.stringify({
+                        'UrunId': urunId, 'SipMik': Sipmik }),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (data) {

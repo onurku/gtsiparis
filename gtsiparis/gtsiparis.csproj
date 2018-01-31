@@ -251,6 +251,10 @@
     <Compile Include="Migrations\201801181650278_SipariseBirimFiyatEklendi.Designer.cs">
       <DependentUpon>201801181650278_SipariseBirimFiyatEklendi.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801221504089_test.cs" />
+    <Compile Include="Migrations\201801221504089_test.Designer.cs">
+      <DependentUpon>201801221504089_test.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Birim.cs" />
@@ -514,6 +518,8 @@
     <Content Include="Views\Urun\Details.cshtml" />
     <Content Include="Views\Urun\Edit.cshtml" />
     <Content Include="Views\Urun\Index.cshtml" />
+    <Content Include="Views\Shared\_SiparisGuncelle.cshtml" />
+    <Content Include="Views\Shared\_SiparisSilMesaj.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -557,6 +563,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801181650278_SipariseBirimFiyatEklendi.resx">
       <DependentUpon>201801181650278_SipariseBirimFiyatEklendi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801221504089_test.resx">
+      <DependentUpon>201801221504089_test.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

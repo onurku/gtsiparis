@@ -46,6 +46,7 @@ namespace gtsiparis.Controllers
             }
             pager = new Pager(UrunListesi.Count(), page);
             Session["Lastpager"] = page;
+            
             SiparisMenuView viewModel = new SiparisMenuView
             {
                 KategoriItems = db.Kategori.ToList(),
@@ -69,17 +70,18 @@ namespace gtsiparis.Controllers
         
         public ActionResult UrunGosterDetay(int id, decimal SipMik)
         {
-            Urun Urun1 = db.Urun.Find(id);
+            Urun Urun = db.Urun.Find(id);
+            
             if (!SipMik.Equals(null))
             {
                 ViewBag.SipMik = SipMik;
             }
             else { ViewBag.SipMik = 0; }
-            if (Urun1 == null)
+            if (Urun == null)
             {
                 return HttpNotFound();
             }
-            return View(Urun1);
+            return View(Urun);
         }
 
         [HttpPost]
@@ -87,41 +89,63 @@ namespace gtsiparis.Controllers
         {
             var userId = User.Identity.GetUserId();
             Urun urun = db.Urun.Find(UrunId);
-            decimal urunFiyat = db.Urun.Find(UrunId).Fiyat;
-            Siparis siparis = (from b in db.Siparis where (b.Urun_Id == UrunId && b.Kullanici_Id == userId) select b).FirstOrDefault();
-            if (siparis.Id ==null)
-            {
+             
                 Siparis sparis = new Siparis
                 {
                     Kullanici_Id = userId,
                     Miktar = SipMik,
                     Urun_Id = UrunId,
                     Tutar = urun.Fiyat * SipMik,
-                    BirimFiyat = urunFiyat,
+                    BirimFiyat = urun.Fiyat,
                     Tarih = DateTime.Now
                 };
                 db.Siparis.Add(sparis);
-            }
-         
- 
-            
-            db.SaveChanges();
+                db.SaveChanges();
             ViewData["msg"] = "Siparişiniz başarıyla eklenmiştir. ";
-            if(SipMik == 0)
-            {
-                return Json(Url.Action("UrunListesi", "Genel", new { id = urun.Kategori_Id, page = Session["Lastpager"] }));
-            }
-            else
-            {
-                return Json(Url.Action("SiparisleriGetir", "Genel"));
-            }
             
+            return Json(Url.Action("UrunListesi", "Genel", new { id = urun.Kategori_Id, page = Session["Lastpager"] }));
+            
+        }
+
+        [HttpPost]
+        public ActionResult SepetGuncelle(int? id)
+        {
+            Siparis siparis= db.Siparis.Find(id);
+            return PartialView("_SiparisGuncelle",siparis);
+        }
+
+
+        [HttpPost]
+        public ActionResult SepetSil(int? id)
+        {
+            Siparis siparis = db.Siparis.Find(id);
+            return PartialView("_SiparisSilMesaj", siparis);
+        }
+
+        [HttpPost]
+        public ActionResult SepetGuncelleCalc(int? id, decimal SipMik)
+        {
+            Siparis siparis = db.Siparis.Find(id);
+            siparis.Miktar = SipMik;
+            siparis.Tutar = SipMik*siparis.BirimFiyat;
+            db.Entry(siparis).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json(Url.Action("SiparisleriGetir", "Genel"));
+        }
+
+        [HttpPost]
+        public ActionResult SepetSilCalc(int? id)
+        {
+            Siparis siparis = db.Siparis.Find(id);
+            db.Siparis.Remove(siparis);
+            db.SaveChanges();
+            return Json(Url.Action("SiparisleriGetir", "Genel"));
         }
 
         public ActionResult Sepet()
         {
             var userId = User.Identity.GetUserId();
-            ViewBag.Miktar = (from b in db.Siparis where b.Kullanici_Id == userId select b).Count();
+            ViewBag.Miktar = (from b in db.Siparis where (b.Kullanici_Id == userId && b.Onay!=true ) select b).Count();
             return PartialView("_SiparisSepet");
         }
 
@@ -129,15 +153,25 @@ namespace gtsiparis.Controllers
         {
             var userId = User.Identity.GetUserId();
             IEnumerable<Siparis> SiparisListesi;
-            SiparisListesi = (from b in db.Siparis where b.Kullanici_Id == userId select b).ToList();
+            SiparisListesi = (from b in db.Siparis where (b.Kullanici_Id == userId && b.Onay!=true) select b).ToList();
            
             return View(SiparisListesi);
         }
 
+
+        [ActionName("Onayla")]
         public ActionResult SiparisleriOnayla()
         {
-
-            return View();
+            var userId = User.Identity.GetUserId();
+            IEnumerable<Siparis> SiparisListesi;
+            SiparisListesi = (from b in db.Siparis where (b.Kullanici_Id == userId && b.Onay!=true ) select b).ToList();
+            foreach (Siparis siparis in SiparisListesi)
+            {
+                siparis.Onay = true;
+                db.Entry(siparis).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index","Home");
         }
     }
 }

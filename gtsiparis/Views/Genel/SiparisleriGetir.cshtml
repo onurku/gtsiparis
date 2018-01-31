@@ -30,6 +30,7 @@
         <th></th>
     </tr>
 @foreach (var item in Model) {
+    
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Urun.Adi)
@@ -47,19 +48,19 @@
             @Html.DisplayFor(modelItem => item.Tarih)
         </td>
         <td>
-            @*@Html.ActionLink("Değiştir", "Edit", new { id=item.Id })*@ 
-            @Html.ActionLink("Güncelle", "UrunGosterDetay", "Genel", new { id = item.Urun_Id, SipMik=item.Miktar }, new { @class = "btn btn-default" })
-| @Html.ActionLink("Sil", "Delete", new { id=item.Id })
+            <input type="button" id="Guncelle" value="Güncelle"  onclick="Guncelle(@item.Id);" class="btn btn-default" /> | <input type="button" id="Sil" value="Sil" onclick="Sil(@item.Id);" class="btn btn-default" />
+            @*@Html.ActionLink("Güncelle", "UrunGosterDetay", "Genel", new { id = item.Urun_Id, SipMik=item.Miktar }, new { @class = "btn btn-primary", @id="test"})
+| @Html.ActionLink("Sil", "Delete", new { id=item.Id }, new { @class = "btn btn-primary" })*@
         </td>
     </tr>
 }
     <tr>
-        <td/><td><span style="font-weight:bold">Toplam =></span>
-        </td>
+        <td/>
+        <td />
+        <td><span style="font-weight:bold">Toplam =></span></td>
         <td>
             @Model.Sum(x => x.Tutar) ₺
         </td>
-        <td/>
     </tr>
     <tr>
         <td />
@@ -67,8 +68,118 @@
         <td />
         <td />
         <td>
-            <p> @Html.ActionLink("Siparişini Onayla", "SiparisleriOnayla", "Genel", null, new { @class = "btn btn-primary btn-large" }) </p>
+            <p> @Html.ActionLink("Siparişini Onayla", "Onayla", "Genel", null, new { @class = "btn btn-primary btn-large" }) </p>
         </td>
     </tr>
-
 </table>
+
+<div class="modal fade" tabindex="-1" id="GuncelleModal" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div id="SiparisDetay"></div>
+                <br />
+                <input type="button" id="GuncelleCalc" value="Güncelle" class="btn btn-default" />
+                <input type="button" id="btnHideModal" value="İptal"  class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="SilModal" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div id="SilDetay"></div>
+                <br />
+                <input type="button" id="SilCalc" value="Tamam" class="btn btn-default" />
+                <input type="button" id="btnHideModalSil" value="İptal" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</div>
+   
+
+<div id="dialog" style="display: none">
+</div>
+@section scripts {
+<script type="text/javascript">
+
+    function Guncelle(i) {
+        $.ajax({
+            type: "POST",
+            url: "/Genel/SepetGuncelle",
+            data: JSON.stringify({'id': i}),
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            success: function (response) {
+                $('#SiparisDetay').html(response);
+                $("#GuncelleModal").modal('show');
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    }
+    function Sil(i) {
+        $.ajax({
+            type: "POST",
+            url: "/Genel/SepetSil",
+            data: JSON.stringify({ 'id': i }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            success: function (response) {
+                $('#SilDetay').html(response);
+                $("#SilModal").modal('show');
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    }
+    $("#btnHideModal").click(function () {
+        $("#GuncelleModal").modal('hide');
+    });
+    $("#btnHideModalSil").click(function () {
+        $("#SilModal").modal('hide');
+    });
+    $("#GuncelleCalc").click(function () {
+            var Id = $("#SiparisId").val();
+            var Sipmik = $("#SipMik").val();
+            $.ajax({
+                type: "POST",
+                url: "/Genel/SepetGuncelleCalc",
+                data: JSON.stringify({
+                    'Id': Id, 'SipMik': Sipmik
+                }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    window.location.href = data;
+                }
+            });
+    });
+    $("#SilCalc").click(function () {
+        var Id = $("#SiparisId").val();
+        $.ajax({
+            type: "POST",
+            url: "/Genel/SepetSilCalc",
+            data: JSON.stringify({
+                'Id': Id
+            }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                window.location.href = data;
+            }
+        });
+    });
+
+</script>
+}

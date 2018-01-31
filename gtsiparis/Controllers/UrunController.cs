@@ -58,6 +58,8 @@ namespace gtsiparis.Controllers
             ViewBag.Birim_Id = new SelectList(db.Birim, "Id", "BirimAdi");
             ViewBag.Grup_Id = new SelectList(db.Grup, "Id", "GrupAdi");
             ViewBag.Kategori_Id = new SelectList(db.Kategori, "Id", "KategoriAdi");
+            ViewBag.Sorumlu_Id = new SelectList(db.Users, "Id", "AdSoyad");
+            ViewBag.Uretici_Id = new SelectList(db.Users, "Id", "AdSoyad");
             ViewBag.StokId = new SelectList(db.Stok, "Id", "Id");
 
             return View();
@@ -80,6 +82,8 @@ namespace gtsiparis.Controllers
             ViewBag.Birim_Id = new SelectList(db.Birim, "Id", "BirimAdi", urun.Birim_Id);
             ViewBag.Grup_Id = new SelectList(db.Grup, "Id", "GrupAdi", urun.Grup_Id);
             ViewBag.Kategori_Id = new SelectList(db.Kategori, "Id", "KategoriAdi", urun.Kategori_Id);
+            ViewBag.Sorumlu_Id = new SelectList(db.Users, "Id", "AdSoyad", urun.Kategori_Id);
+            ViewBag.Uretici_Id = new SelectList(db.Users, "Id", "AdSoyad", urun.Uretici_Id);
             ViewBag.StokId = new SelectList(db.Stok, "Id", "Id", urun.StokId);
             return View(urun);
         }

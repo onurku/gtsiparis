@@ -1,0 +1,5 @@
+﻿@model gtsiparis.Siparis
+<div>
+@Html.HiddenFor(model => model.Id, new { @id = "SiparisId" })
+@Html.DisplayFor(model => model.Urun.Adi) ürününden  @Html.DisplayFor(model => model.Miktar) @Html.DisplayFor(model => model.Urun.Birim.BirimAdi) Siparişiniz silinecektir. Onaylıyor musunuz ? 
+</div>
