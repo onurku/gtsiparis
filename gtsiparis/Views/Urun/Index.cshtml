@@ -5,10 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Tüm Ürün Listesi</h2>
 <p>
     @Html.ActionLink("Yeni Ürün", "Create")
 </p>
+<div id="excelIco" class="col-md-1">
+    <input type="image" id="excelIcon" onclick="location.href ='@Url.Action("UrunExportToExcel", "Urun")'; return false;" src="~/Gorsel/Excel.png" />
+</div>
 <table class="table">
     <tr>
         <th>
@@ -85,3 +88,22 @@
         }
     </ul>
 }
+@section scripts {
+    <script type="text/javascript">
+        $('#excelIco').mouseenter(function (e) {
+            $('#excelIcon').animate({
+                left: '80px',
+                height: '80px',
+                width: '80px'
+            });
+        });
+        $('#excelIco').mouseleave(function (e) {
+            $('#excelIcon').animate({
+                left: '12px',
+                height: '35px',
+                width: '35px'
+            });
+        });
+
+    </script>
+ }

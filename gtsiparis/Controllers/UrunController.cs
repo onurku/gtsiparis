@@ -10,6 +10,11 @@ using gtsiparis;
 using PagedList;
 using PagedList.Mvc;
 using gtsiparis.Models;
+using ClosedXML.Excel;
+using System.Web.UI.WebControls;
+using System.IO;
+using System.Web.UI;
+using System.Collections;
 
 namespace gtsiparis.Controllers
 {
@@ -173,6 +178,26 @@ namespace gtsiparis.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult UrunExportToExcel()
+        {
+            var gv = new GridView();
+            gv.DataSource = (from b in db.Urun where (b.Aktif == true) select b).ToList();
+            gv.DataBind();
+            Response.ClearContent();
+            Response.Buffer = true;
+            var nowdate = DateTime.Now.ToString("yyyyMMdd");
+            Response.AddHeader("content-disposition", "attachment; filename="+ nowdate + "UrunListesiAktif.xls");
+            Response.ContentType = "application/ms-excel";
+            Response.Charset = "";
+            StringWriter objStringWriter = new StringWriter();
+            HtmlTextWriter objHtmlTextWriter = new HtmlTextWriter(objStringWriter);
+            gv.RenderControl(objHtmlTextWriter);
+            Response.Output.Write(objStringWriter.ToString());
+            Response.Flush();
+            Response.End();
+            return View("Index");
         }
     }
 }

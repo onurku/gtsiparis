@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using gtsiparis;
 using gtsiparis.Models;
 using Microsoft.AspNet.Identity;
 using PagedList;
 using PagedList.Mvc;
+
 
 namespace gtsiparis.Controllers
 {
@@ -173,5 +171,7 @@ namespace gtsiparis.Controllers
             }
             return RedirectToAction("Index","Home");
         }
+
+
     }
 }
