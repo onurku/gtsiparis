@@ -49,8 +49,6 @@
         </td>
         <td>
             <input type="button" id="Guncelle" value="Güncelle"  onclick="Guncelle(@item.Id);" class="btn btn-default" /> | <input type="button" id="Sil" value="Sil" onclick="Sil(@item.Id);" class="btn btn-default" />
-            @*@Html.ActionLink("Güncelle", "UrunGosterDetay", "Genel", new { id = item.Urun_Id, SipMik=item.Miktar }, new { @class = "btn btn-primary", @id="test"})
-| @Html.ActionLink("Sil", "Delete", new { id=item.Id }, new { @class = "btn btn-primary" })*@
         </td>
     </tr>
 }
@@ -68,7 +66,6 @@
         <td />
         <td />
         <td>
-            @*<p> @Html.ActionLink("Siparişini Onayla", "Onayla", "Genel", null, new { @class = "btn btn-primary btn-large" }) </p>*@
         </td>
     </tr>
 </table>

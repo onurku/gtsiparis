@@ -69,7 +69,6 @@ namespace gtsiparis.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
         [EmailAddress]
         [Display(Name = "Referans Email")]
         public string RefEmail { get; set; }

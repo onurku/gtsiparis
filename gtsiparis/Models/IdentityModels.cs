@@ -12,7 +12,7 @@ namespace gtsiparis
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        [Required]
+        
         [EmailAddress]
         [Display(Name = "Referans Email Adresi")]
         public string RefEmail { get; set; }
@@ -28,8 +28,6 @@ namespace gtsiparis
         {
             get { return Adi + " " + Soyadi; }
         }
-
-
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

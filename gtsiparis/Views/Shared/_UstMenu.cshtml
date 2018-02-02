@@ -16,6 +16,7 @@
             @if (Request.IsAuthenticated)
             {
             <li>@Html.ActionLink("Sipariş Ver", "UrunListesi", "Genel", new { id = 14, page=1 }, null)</li>
+            <li>@Html.ActionLink("Tüm Siparişler", "TumSiparisler", "Genel", null, null)</li>
             <li>
                 <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">

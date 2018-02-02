@@ -227,45 +227,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801091219046_InitialCreate.cs" />
-    <Compile Include="Migrations\201801091219046_InitialCreate.Designer.cs">
-      <DependentUpon>201801091219046_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801111403331_initial2.cs" />
-    <Compile Include="Migrations\201801111403331_initial2.Designer.cs">
-      <DependentUpon>201801111403331_initial2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801121333130_IdendityAdditions.cs" />
-    <Compile Include="Migrations\201801121333130_IdendityAdditions.Designer.cs">
-      <DependentUpon>201801121333130_IdendityAdditions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801131624588_GrupSench.cs" />
-    <Compile Include="Migrations\201801131624588_GrupSench.Designer.cs">
-      <DependentUpon>201801131624588_GrupSench.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801131627580_GrupSe2.cs" />
-    <Compile Include="Migrations\201801131627580_GrupSe2.Designer.cs">
-      <DependentUpon>201801131627580_GrupSe2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801151217445_urunAdditions.cs" />
-    <Compile Include="Migrations\201801151217445_urunAdditions.Designer.cs">
-      <DependentUpon>201801151217445_urunAdditions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801151405051_cascadedelete.cs" />
-    <Compile Include="Migrations\201801151405051_cascadedelete.Designer.cs">
-      <DependentUpon>201801151405051_cascadedelete.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801181613210_SipariseTutarEklendi.cs" />
-    <Compile Include="Migrations\201801181613210_SipariseTutarEklendi.Designer.cs">
-      <DependentUpon>201801181613210_SipariseTutarEklendi.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801181650278_SipariseBirimFiyatEklendi.cs" />
-    <Compile Include="Migrations\201801181650278_SipariseBirimFiyatEklendi.Designer.cs">
-      <DependentUpon>201801181650278_SipariseBirimFiyatEklendi.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801221504089_test.cs" />
-    <Compile Include="Migrations\201801221504089_test.Designer.cs">
-      <DependentUpon>201801221504089_test.cs</DependentUpon>
+    <Compile Include="Migrations\201802011358232_InitialCreate.cs" />
+    <Compile Include="Migrations\201802011358232_InitialCreate.Designer.cs">
+      <DependentUpon>201802011358232_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -319,7 +283,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Gorsel\down.png" />
-    <Content Include="Gorsel\Excel.ico" />
+    <Content Include="Gorsel\excel.png" />
     <Content Include="Gorsel\up.png" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
@@ -332,6 +296,7 @@
     <Content Include="Content\bootstrap-datepicker3.css.map" />
     <Content Include="Content\bootstrap-datepicker.standalone.css.map" />
     <Content Include="Content\bootstrap-datepicker.css.map" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\DatePickerReady.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
@@ -550,35 +515,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801091219046_InitialCreate.resx">
-      <DependentUpon>201801091219046_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801111403331_initial2.resx">
-      <DependentUpon>201801111403331_initial2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801121333130_IdendityAdditions.resx">
-      <DependentUpon>201801121333130_IdendityAdditions.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801131624588_GrupSench.resx">
-      <DependentUpon>201801131624588_GrupSench.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801131627580_GrupSe2.resx">
-      <DependentUpon>201801131627580_GrupSe2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801151217445_urunAdditions.resx">
-      <DependentUpon>201801151217445_urunAdditions.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801151405051_cascadedelete.resx">
-      <DependentUpon>201801151405051_cascadedelete.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801181613210_SipariseTutarEklendi.resx">
-      <DependentUpon>201801181613210_SipariseTutarEklendi.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801181650278_SipariseBirimFiyatEklendi.resx">
-      <DependentUpon>201801181650278_SipariseBirimFiyatEklendi.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801221504089_test.resx">
-      <DependentUpon>201801221504089_test.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802011358232_InitialCreate.resx">
+      <DependentUpon>201802011358232_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
