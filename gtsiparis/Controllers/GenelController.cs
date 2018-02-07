@@ -156,6 +156,14 @@ namespace gtsiparis.Controllers
             return View(SiparisListesi);
         }
 
+        public ActionResult TumSiparisler()
+        {
+            var month = DateTime.Now.Month;
+            IEnumerable<Siparis> SiparisListesi;
+            SiparisListesi = (from b in db.Siparis where (b.Tarih.Month ==month ) select b).ToList();
+            return View(SiparisListesi);
+        }
+
 
         [ActionName("Onayla")]
         public ActionResult SiparisleriOnayla()

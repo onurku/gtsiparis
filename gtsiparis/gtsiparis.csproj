@@ -498,6 +498,7 @@
     <Content Include="Views\Urun\Index.cshtml" />
     <Content Include="Views\Shared\_SiparisGuncelle.cshtml" />
     <Content Include="Views\Shared\_SiparisSilMesaj.cshtml" />
+    <Content Include="Views\Genel\TumSiparisler.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
