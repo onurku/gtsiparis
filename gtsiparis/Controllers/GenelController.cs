@@ -12,6 +12,7 @@ using PagedList.Mvc;
 
 namespace gtsiparis.Controllers
 {
+    
     public class GenelController : Controller
     {
         // GET: Genel
@@ -85,6 +86,9 @@ namespace gtsiparis.Controllers
         [HttpPost]
         public ActionResult SiparisiSepeteEkle(int UrunId, decimal SipMik)
         {
+            if (!User.Identity.IsAuthenticated)
+                return Json(Url.Action("Login", "Account"));
+
             var userId = User.Identity.GetUserId();
             Urun urun = db.Urun.Find(UrunId);
              
@@ -108,6 +112,9 @@ namespace gtsiparis.Controllers
         [HttpPost]
         public ActionResult SepetGuncelle(int? id)
         {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "Account");
+
             Siparis siparis= db.Siparis.Find(id);
             return PartialView("_SiparisGuncelle",siparis);
         }
@@ -116,6 +123,9 @@ namespace gtsiparis.Controllers
         [HttpPost]
         public ActionResult SepetSil(int? id)
         {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "Account");
+
             Siparis siparis = db.Siparis.Find(id);
             return PartialView("_SiparisSilMesaj", siparis);
         }
@@ -123,6 +133,9 @@ namespace gtsiparis.Controllers
         [HttpPost]
         public ActionResult SepetGuncelleCalc(int? id, decimal SipMik)
         {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "Account");
+
             Siparis siparis = db.Siparis.Find(id);
             siparis.Miktar = SipMik;
             siparis.Tutar = SipMik*siparis.BirimFiyat;
@@ -134,6 +147,9 @@ namespace gtsiparis.Controllers
         [HttpPost]
         public ActionResult SepetSilCalc(int? id)
         {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "Account");
+
             Siparis siparis = db.Siparis.Find(id);
             db.Siparis.Remove(siparis);
             db.SaveChanges();
@@ -149,6 +165,9 @@ namespace gtsiparis.Controllers
 
         public ActionResult SiparisleriGetir()
         {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "Account");
+
             var userId = User.Identity.GetUserId();
             IEnumerable<Siparis> SiparisListesi;
             SiparisListesi = (from b in db.Siparis where (b.Kullanici_Id == userId && b.Onay!=true) select b).ToList();
@@ -158,6 +177,9 @@ namespace gtsiparis.Controllers
 
         public ActionResult TumSiparisler()
         {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "Account");
+
             var month = DateTime.Now.Month;
             IEnumerable<Siparis> SiparisListesi;
             SiparisListesi = (from b in db.Siparis where (b.Tarih.Month ==month ) select b).ToList();
@@ -168,6 +190,9 @@ namespace gtsiparis.Controllers
         [ActionName("Onayla")]
         public ActionResult SiparisleriOnayla()
         {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "Account");
+
             var userId = User.Identity.GetUserId();
             IEnumerable<Siparis> SiparisListesi;
             SiparisListesi = (from b in db.Siparis where (b.Kullanici_Id == userId && b.Onay!=true ) select b).ToList();
