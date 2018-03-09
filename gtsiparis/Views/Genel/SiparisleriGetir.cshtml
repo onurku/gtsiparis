@@ -18,6 +18,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Miktar)
         </th>
+        <th>Birim</th>
         <th>
             Birim Fiyatı
         </th>
@@ -27,6 +28,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Tarih)
         </th>
+        <td></td>
         <th></th>
     </tr>
 @foreach (var item in Model) {
@@ -36,7 +38,9 @@
             @Html.DisplayFor(modelItem => item.Urun.Adi)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Miktar) @Html.DisplayFor(modelItem => item.Urun.Birim.BirimAdi)
+            @Html.TextBox("SipMik" + item.Id ,(decimal)item.Miktar, htmlAttributes: new { @class = "form-control textw", @id = "SipMik" + item.Id })
+        </td>
+        <td><span class="input-group-addon" id="basic-addon1" style="width:60px">@Html.DisplayFor(modelItem => item.Urun.Birim.BirimAdi)</span>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.BirimFiyat) ₺
@@ -103,21 +107,19 @@
 <script type="text/javascript">
 
     function Guncelle(i) {
+        var Sipmik = $("#SipMik" + i).val();
+        
         $.ajax({
             type: "POST",
-            url: "/Genel/SepetGuncelle",
-            data: JSON.stringify({'id': i}),
+            url: "/Genel/SepetGuncelleCalc",
+            data: JSON.stringify({
+                'Id': i, 'SipMik': Sipmik
+            }),
             contentType: "application/json; charset=utf-8",
-            dataType: "html",
-            success: function (response) {
-                $('#SiparisDetay').html(response);
-                $("#GuncelleModal").modal('show');
-            },
-            failure: function (response) {
-                alert(response.responseText);
-            },
-            error: function (response) {
-                alert(response.responseText);
+            dataType: "json",
+            success: function (data) {
+                alert("Siparişiniz başarılı ile güncellenmiştir")
+                window.location.href = data;
             }
         });
     }

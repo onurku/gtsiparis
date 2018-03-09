@@ -139,6 +139,7 @@ namespace gtsiparis.Controllers
             Siparis siparis = db.Siparis.Find(id);
             siparis.Miktar = SipMik;
             siparis.Tutar = SipMik*siparis.BirimFiyat;
+            siparis.Tarih = DateTime.Now;
             db.Entry(siparis).State = EntityState.Modified;
             db.SaveChanges();
             return Json(Url.Action("SiparisleriGetir", "Genel"));
