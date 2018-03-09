@@ -65,6 +65,18 @@ namespace gtsiparis.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Adı")]
+        public string Adi { get; set; }
+
+        [Required]
+        [Display(Name = "Soyadi")]
+        public string Soyadi { get; set; }
+
+        [Required]
+        [Display(Name = "Kullanici Adi")]
+        public string UserNick { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }

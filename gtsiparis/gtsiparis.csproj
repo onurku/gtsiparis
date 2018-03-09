@@ -26,6 +26,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -230,6 +231,10 @@
     <Compile Include="Migrations\201802011358232_InitialCreate.cs" />
     <Compile Include="Migrations\201802011358232_InitialCreate.Designer.cs">
       <DependentUpon>201802011358232_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803090854479_UserNickField.cs" />
+    <Compile Include="Migrations\201803090854479_UserNickField.Designer.cs">
+      <DependentUpon>201803090854479_UserNickField.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -519,6 +524,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201802011358232_InitialCreate.resx">
       <DependentUpon>201802011358232_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803090854479_UserNickField.resx">
+      <DependentUpon>201803090854479_UserNickField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

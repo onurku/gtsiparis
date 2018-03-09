@@ -23,6 +23,9 @@ namespace gtsiparis
         [Display(Name = "Soyadi")]
         public string Soyadi { get; set; }
 
+        [Display(Name = "Kullanici Adi")]
+        public string UserNick { get; set; }
+
         [Display(Name = "Adı Soyadı")]
         public string AdSoyad
         {
