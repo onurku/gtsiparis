@@ -52,8 +52,9 @@
 
         public bool Aktif { get; set; }
 
-        [DisplayName("Birim")]
+        
         public int? Birim_Id { get; set; }
+        [DisplayName("Birim")]
         public virtual Birim Birim { get; set; }
 
         [DisplayName("Stok")]

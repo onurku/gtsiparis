@@ -160,7 +160,7 @@ namespace gtsiparis.Controllers
         public ActionResult Sepet()
         {
             var userId = User.Identity.GetUserId();
-            ViewBag.Miktar = (from b in db.Siparis where (b.Kullanici_Id == userId && b.Onay!=true ) select b).Count();
+            ViewBag.Miktar = (from b in db.Siparis where (b.Kullanici_Id == userId  ) select b).Count();
             return PartialView("_SiparisSepet");
         }
 
@@ -171,7 +171,7 @@ namespace gtsiparis.Controllers
 
             var userId = User.Identity.GetUserId();
             IEnumerable<Siparis> SiparisListesi;
-            SiparisListesi = (from b in db.Siparis where (b.Kullanici_Id == userId && b.Onay!=true) select b).ToList();
+            SiparisListesi = (from b in db.Siparis where (b.Kullanici_Id == userId ) select b).ToList();
            
             return View(SiparisListesi);
         }
@@ -187,24 +187,7 @@ namespace gtsiparis.Controllers
             return View(SiparisListesi);
         }
 
-
-        [ActionName("Onayla")]
-        public ActionResult SiparisleriOnayla()
-        {
-            if (!User.Identity.IsAuthenticated)
-                return RedirectToAction("Login", "Account");
-
-            var userId = User.Identity.GetUserId();
-            IEnumerable<Siparis> SiparisListesi;
-            SiparisListesi = (from b in db.Siparis where (b.Kullanici_Id == userId && b.Onay!=true ) select b).ToList();
-            foreach (Siparis siparis in SiparisListesi)
-            {
-                siparis.Onay = true;
-                db.Entry(siparis).State = EntityState.Modified;
-                db.SaveChanges();
-            }
-            return RedirectToAction("Index","Home");
-        }
+       
 
 
     }

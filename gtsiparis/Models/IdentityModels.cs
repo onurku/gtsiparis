@@ -30,7 +30,17 @@ namespace gtsiparis
         public string AdSoyad
         {
             get { return Adi + " " + Soyadi; }
-        }
+        } [Display(Name = "WebAdmin")]
+        public bool? WebAdmin { get; set; }
+
+        [Display(Name = "Türetici")]
+        public bool? Turetici { get; set; }
+
+        [Display(Name = "Grup Admin")]
+        public bool? GrupAdmin { get; set; }
+
+        [Display(Name = "Üretici")]
+        public bool? Uretici { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

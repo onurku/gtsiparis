@@ -211,30 +211,40 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApplicationUsersController.cs" />
     <Compile Include="Controllers\BirimController.cs" />
     <Compile Include="Controllers\GenelController.cs" />
     <Compile Include="Controllers\GrupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\IlceController.cs" />
-    <Compile Include="Controllers\ILController.cs" />
     <Compile Include="Controllers\KategoriController.cs" />
     <Compile Include="Controllers\LokasyonController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
-    <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\SiparisController.cs" />
     <Compile Include="Controllers\StokController.cs" />
     <Compile Include="Controllers\UrunController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802011358232_InitialCreate.cs" />
-    <Compile Include="Migrations\201802011358232_InitialCreate.Designer.cs">
-      <DependentUpon>201802011358232_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201803102054214_InitialCreate.cs" />
+    <Compile Include="Migrations\201803102054214_InitialCreate.Designer.cs">
+      <DependentUpon>201803102054214_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803090854479_UserNickField.cs" />
-    <Compile Include="Migrations\201803090854479_UserNickField.Designer.cs">
-      <DependentUpon>201803090854479_UserNickField.cs</DependentUpon>
+    <Compile Include="Migrations\201803131216211_test1.cs" />
+    <Compile Include="Migrations\201803131216211_test1.Designer.cs">
+      <DependentUpon>201803131216211_test1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803131220359_test2.cs" />
+    <Compile Include="Migrations\201803131220359_test2.Designer.cs">
+      <DependentUpon>201803131220359_test2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803131248356_RolUserAccount.cs" />
+    <Compile Include="Migrations\201803131248356_RolUserAccount.Designer.cs">
+      <DependentUpon>201803131248356_RolUserAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803131334365_RolAssignment.cs" />
+    <Compile Include="Migrations\201803131334365_RolAssignment.Designer.cs">
+      <DependentUpon>201803131334365_RolAssignment.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -245,8 +255,7 @@
     <Compile Include="Models\GrupIndeksi.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IdentityuserLogin1.cs" />
-    <Compile Include="Models\IL.cs" />
-    <Compile Include="Models\Ilce.cs" />
+    <Compile Include="Models\ImageUploadApp.cs" />
     <Compile Include="Models\ISiparisViewModel.cs" />
     <Compile Include="Models\Kategori.cs" />
     <Compile Include="Models\Lokasyon.cs" />
@@ -254,7 +263,6 @@
     <Compile Include="Models\Menu.cs" />
     <Compile Include="Models\MenuViewModels.cs" />
     <Compile Include="Models\Pager.cs" />
-    <Compile Include="Models\Rol.cs" />
     <Compile Include="Models\Siparis.cs" />
     <Compile Include="Models\SiparisMenuView.cs" />
     <Compile Include="Models\Stok.cs" />
@@ -289,6 +297,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Gorsel\down.png" />
     <Content Include="Gorsel\excel.png" />
+    <Content Include="Gorsel\true_icon.ico" />
     <Content Include="Gorsel\up.png" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
@@ -448,16 +457,6 @@
     <Content Include="Views\Grup\Details.cshtml" />
     <Content Include="Views\Grup\Edit.cshtml" />
     <Content Include="Views\Grup\Index.cshtml" />
-    <Content Include="Views\Ilce\Create.cshtml" />
-    <Content Include="Views\Ilce\Delete.cshtml" />
-    <Content Include="Views\Ilce\Details.cshtml" />
-    <Content Include="Views\Ilce\Edit.cshtml" />
-    <Content Include="Views\Ilce\Index.cshtml" />
-    <Content Include="Views\IL\Create.cshtml" />
-    <Content Include="Views\IL\Delete.cshtml" />
-    <Content Include="Views\IL\Details.cshtml" />
-    <Content Include="Views\IL\Edit.cshtml" />
-    <Content Include="Views\IL\Index.cshtml" />
     <Content Include="Views\Kategori\Create.cshtml" />
     <Content Include="Views\Kategori\Delete.cshtml" />
     <Content Include="Views\Kategori\Details.cshtml" />
@@ -473,11 +472,6 @@
     <Content Include="Views\Menu\Details.cshtml" />
     <Content Include="Views\Menu\Edit.cshtml" />
     <Content Include="Views\Menu\Index.cshtml" />
-    <Content Include="Views\Rol\Create.cshtml" />
-    <Content Include="Views\Rol\Delete.cshtml" />
-    <Content Include="Views\Rol\Details.cshtml" />
-    <Content Include="Views\Rol\Edit.cshtml" />
-    <Content Include="Views\Rol\Index.cshtml" />
     <Content Include="Views\Siparis\Create.cshtml" />
     <Content Include="Views\Siparis\Delete.cshtml" />
     <Content Include="Views\Siparis\Details.cshtml" />
@@ -505,6 +499,12 @@
     <Content Include="Views\Shared\_SiparisGuncelle.cshtml" />
     <Content Include="Views\Shared\_SiparisSilMesaj.cshtml" />
     <Content Include="Views\Genel\TumSiparisler.cshtml" />
+    <Content Include="Views\ApplicationUsers\Create.cshtml" />
+    <Content Include="Views\ApplicationUsers\Delete.cshtml" />
+    <Content Include="Views\ApplicationUsers\Details.cshtml" />
+    <Content Include="Views\ApplicationUsers\Edit.cshtml" />
+    <Content Include="Views\ApplicationUsers\Index.cshtml" />
+    <Content Include="Views\Siparis\EditAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -522,11 +522,20 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802011358232_InitialCreate.resx">
-      <DependentUpon>201802011358232_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803102054214_InitialCreate.resx">
+      <DependentUpon>201803102054214_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803090854479_UserNickField.resx">
-      <DependentUpon>201803090854479_UserNickField.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803131216211_test1.resx">
+      <DependentUpon>201803131216211_test1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803131220359_test2.resx">
+      <DependentUpon>201803131220359_test2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803131248356_RolUserAccount.resx">
+      <DependentUpon>201803131248356_RolUserAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803131334365_RolAssignment.resx">
+      <DependentUpon>201803131334365_RolAssignment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

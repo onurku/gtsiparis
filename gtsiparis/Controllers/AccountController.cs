@@ -151,7 +151,7 @@ namespace gtsiparis.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email , Adi =model.Adi, Soyadi=model.Soyadi, UserNick =model.UserNick};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email , Adi =model.Adi, Soyadi=model.Soyadi , Turetici=model.Turetici, Uretici=model.Uretici, GrupAdmin =model.GrupAdmin};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -237,6 +237,7 @@ namespace gtsiparis.Controllers
             return code == null ? View("Error") : View();
         }
 
+   
         //
         // POST: /Account/ResetPassword
         [HttpPost]

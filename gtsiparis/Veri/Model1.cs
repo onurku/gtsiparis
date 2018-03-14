@@ -16,7 +16,7 @@
             : base("name=dbContext")
         {
         }
-
+        
         public static Model1 Create()
         {
             return new Model1();
@@ -26,9 +26,6 @@
         public virtual DbSet<Birim> Birim { get; set; }
         public virtual DbSet<Grup> Grup { get; set; }
         public virtual DbSet<GrupIndeksi> GrupIndeksi { get; set; }
-        public virtual DbSet<Rol> Rol { get; set; }
-        public virtual DbSet<IL> IL { get; set; }
-        public virtual DbSet<Ilce> Ilce { get; set; }
         public virtual DbSet<Kategori> Kategori { get; set; }
         public virtual DbSet<Lokasyon> Lokasyon { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
@@ -38,10 +35,12 @@
         public virtual DbSet<IdentityUserLogin> UserLogins { get; set; }
         public virtual DbSet<IdentityUserClaim> UserClaims { get; set; }
         public virtual DbSet<IdentityUserRole> UserRoles { get; set; }
+        public virtual DbSet<Image> Image { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("gtadmin");
+            
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
             modelBuilder.Properties<DateTime>().Configure(c => c.HasColumnType("datetime2"));
@@ -68,16 +67,6 @@
                 .WithOptional(e => e.Grup)
                 .HasForeignKey(e => e.Grup_Id);
 
-            modelBuilder.Entity<IL>()
-                .HasMany(e => e.Ilce)
-                .WithOptional(e => e.IL)
-                .HasForeignKey(e => e.IL_Id);
-
-            modelBuilder.Entity<IL>()
-                .HasMany(e => e.Lokasyon)
-                .WithOptional(e => e.IL)
-                .HasForeignKey(e => e.IL_Id);
-
             modelBuilder.Entity<Kategori>()
                 .HasMany(e => e.Urun)
                 .WithOptional(e => e.Kategori)
@@ -89,11 +78,6 @@
                 .HasForeignKey(e => e.Kullanici_Id);
 
             modelBuilder.Entity<ApplicationUser>()
-                .HasMany(e => e.Siparis1)
-                .WithOptional(e => e.Onaylayan)
-                .HasForeignKey(e => e.OnayKullaniciId);
-
-            modelBuilder.Entity<ApplicationUser>()
                 .HasMany(e => e.Urun)
                 .WithOptional(e => e.Sorumlu)
                 .HasForeignKey(e => e.Sorumlu_Id);
@@ -102,16 +86,6 @@
                 .HasMany(e => e.Urun1)
                 .WithOptional(e => e.Uretici)
                 .HasForeignKey(e => e.Uretici_Id);
-
-            modelBuilder.Entity<Lokasyon>()
-                .HasMany(e => e.Grup)
-                .WithOptional(e => e.Lokasyon)
-                .HasForeignKey(e => e.Lokasyon_Id);
-
-            modelBuilder.Entity<Lokasyon>()
-                .HasMany(e => e.Kategori)
-                .WithOptional(e => e.Lokasyon)
-                .HasForeignKey(e => e.Lokasyon_Id);
 
             modelBuilder.Entity<Urun>()
                 .Property(e => e.RowVersion)
@@ -135,5 +109,7 @@
             // - - - - - 
 
         }
+
+        public System.Data.Entity.DbSet<gtsiparis.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

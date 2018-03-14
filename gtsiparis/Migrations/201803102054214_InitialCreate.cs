@@ -99,6 +99,7 @@ namespace gtsiparis.Migrations
                         RefEmail = c.String(),
                         Adi = c.String(),
                         Soyadi = c.String(),
+                        UserNick = c.String(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                         Rol_Id = c.Int(),
                     })
@@ -228,19 +229,18 @@ namespace gtsiparis.Migrations
                         Tutar = c.Decimal(nullable: false, precision: 18, scale: 2),
                         BirimFiyat = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Tarih = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
-                        Onay = c.Boolean(nullable: false),
                         Iade = c.Boolean(nullable: false),
                         Kullanici_Id = c.String(maxLength: 128),
-                        OnayKullaniciId = c.String(maxLength: 128),
                         Urun_Id = c.Int(),
+                        ApplicationUser_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("gtadmin.IdentityUsers", t => t.Kullanici_Id)
-                .ForeignKey("gtadmin.IdentityUsers", t => t.OnayKullaniciId)
+                .ForeignKey("gtadmin.IdentityUsers", t => t.ApplicationUser_Id)
                 .ForeignKey("gtadmin.Urun", t => t.Urun_Id, cascadeDelete: true)
                 .Index(t => t.Kullanici_Id)
-                .Index(t => t.OnayKullaniciId)
-                .Index(t => t.Urun_Id);
+                .Index(t => t.Urun_Id)
+                .Index(t => t.ApplicationUser_Id);
             
             CreateTable(
                 "gtadmin.Stok",
@@ -258,7 +258,7 @@ namespace gtsiparis.Migrations
                 .Index(t => t.UrunId);
             
             CreateTable(
-                "gtadmin.__MigrationHistory",
+                "gtadmin.C__MigrationHistory",
                 c => new
                     {
                         MigrationId = c.String(nullable: false, maxLength: 150),
@@ -267,6 +267,15 @@ namespace gtsiparis.Migrations
                         ProductVersion = c.String(nullable: false, maxLength: 32),
                     })
                 .PrimaryKey(t => new { t.MigrationId, t.ContextKey });
+            
+            CreateTable(
+                "gtadmin.Gorsel",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        ImagePath = c.String(),
+                    })
+                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "gtadmin.Menu",
@@ -305,7 +314,7 @@ namespace gtsiparis.Migrations
             DropForeignKey("gtadmin.GrupIndeksi", "GrupId", "gtadmin.Grup");
             DropForeignKey("gtadmin.Urun", "Uretici_Id", "gtadmin.IdentityUsers");
             DropForeignKey("gtadmin.Urun", "Sorumlu_Id", "gtadmin.IdentityUsers");
-            DropForeignKey("gtadmin.Siparis", "OnayKullaniciId", "gtadmin.IdentityUsers");
+            DropForeignKey("gtadmin.Siparis", "ApplicationUser_Id", "gtadmin.IdentityUsers");
             DropForeignKey("gtadmin.Siparis", "Kullanici_Id", "gtadmin.IdentityUsers");
             DropForeignKey("gtadmin.Urun", "Kategori_Id", "gtadmin.Kategori");
             DropForeignKey("gtadmin.Lokasyon", "Rol_Id1", "gtadmin.Rol");
@@ -317,8 +326,8 @@ namespace gtsiparis.Migrations
             DropForeignKey("gtadmin.Kategori", "Kullanici_Id", "gtadmin.IdentityUsers");
             DropForeignKey("gtadmin.GrupIndeksi", "User_Id", "gtadmin.IdentityUsers");
             DropIndex("gtadmin.Stok", new[] { "UrunId" });
+            DropIndex("gtadmin.Siparis", new[] { "ApplicationUser_Id" });
             DropIndex("gtadmin.Siparis", new[] { "Urun_Id" });
-            DropIndex("gtadmin.Siparis", new[] { "OnayKullaniciId" });
             DropIndex("gtadmin.Siparis", new[] { "Kullanici_Id" });
             DropIndex("gtadmin.IdentityUserRoles", new[] { "IdentityUser_Id" });
             DropIndex("gtadmin.IdentityUserRoles", new[] { "IdentityRole_Id" });
@@ -342,7 +351,8 @@ namespace gtsiparis.Migrations
             DropIndex("gtadmin.Urun", new[] { "Birim_Id" });
             DropTable("gtadmin.IdentityRoles");
             DropTable("gtadmin.Menu");
-            DropTable("gtadmin.__MigrationHistory");
+            DropTable("gtadmin.Gorsel");
+            DropTable("gtadmin.C__MigrationHistory");
             DropTable("gtadmin.Stok");
             DropTable("gtadmin.Siparis");
             DropTable("gtadmin.IdentityUserRoles");

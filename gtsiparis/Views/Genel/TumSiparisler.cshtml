@@ -13,9 +13,6 @@
             @Html.DisplayNameFor(model => model.Kullanici.AdSoyad)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Onaylayan.AdSoyad)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Urun.Adi)
         </th>
         <th>
@@ -31,9 +28,6 @@
             @Html.DisplayNameFor(model => model.Tarih)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Onay)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Iade)
         </th>
         <th></th>
@@ -43,9 +37,6 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Kullanici.AdSoyad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Onaylayan.AdSoyad)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Urun.Adi)
@@ -63,15 +54,11 @@
             @Html.DisplayFor(modelItem => item.Tarih)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Onay)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Iade)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Güncelle", "EditAdmin", new { controller = "Siparis", id=item.Id }) |
+            @Html.ActionLink("Sil", "Delete", "Siparis", new { id = item.Id })
         </td>
     </tr>
 }

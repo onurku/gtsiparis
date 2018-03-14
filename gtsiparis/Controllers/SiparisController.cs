@@ -51,7 +51,7 @@ namespace gtsiparis.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Miktar,Tarih,Onay,Iade,Kullanici_Id,Urun_Id,OnayKullaniciId")] Siparis siparis)
+        public ActionResult Create([Bind(Include = "Id,Miktar,Tarih,Onay,Iade,Kullanici_Id,Urun_Id")] Siparis siparis)
         {
             if (ModelState.IsValid)
             {
@@ -59,7 +59,7 @@ namespace gtsiparis.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.OnayliKullanici_ID = new SelectList(db.Users, "Id", "AdSoyad", siparis.OnayKullaniciId);
+      
             ViewBag.Kullanici_Id = new SelectList(db.Users, "Id", "AdSoyad", siparis.Kullanici_Id);
             ViewBag.Urun_Id = new SelectList(db.Urun, "Id", "Adi", siparis.Urun_Id);
             return View(siparis);
@@ -77,7 +77,6 @@ namespace gtsiparis.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.OnayliKullanici_ID = new SelectList(db.Users, "Id", "AdSoyad", siparis.OnayKullaniciId);
             ViewBag.Kullanici_Id = new SelectList(db.Users, "Id", "AdSoyad", siparis.Kullanici_Id);
             ViewBag.Urun_Id = new SelectList(db.Urun, "Id", "Adi", siparis.Urun_Id);
             return View(siparis);
@@ -88,7 +87,7 @@ namespace gtsiparis.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Miktar,Tarih,Onay,Iade,Kullanici_Id,Urun_Id,OnayliKullanici_ID")] Siparis siparis)
+        public ActionResult Edit([Bind(Include = "Id,Miktar,Tarih,Iade,Kullanici_Id,Urun_Id")] Siparis siparis)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +95,41 @@ namespace gtsiparis.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.OnayliKullanici_ID = new SelectList(db.Users, "Id", "AdSoyad", siparis.OnayKullaniciId);
+            ViewBag.Kullanici_Id = new SelectList(db.Users, "Id", "AdSoyad", siparis.Kullanici_Id);
+            ViewBag.Urun_Id = new SelectList(db.Urun, "Id", "Adi", siparis.Urun_Id);
+            return View(siparis);
+        }
+
+        // GET: Siparis/Edit/5
+        public ActionResult EditAdmin(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Siparis siparis = db.Siparis.Find(id);
+            if (siparis == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Kullanici_Id = new SelectList(db.Users, "Id", "AdSoyad", siparis.Kullanici_Id);
+            ViewBag.Urun_Id = new SelectList(db.Urun, "Id", "Adi", siparis.Urun_Id);
+            return View(siparis);
+        }
+
+        // POST: Siparis/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditAdmin([Bind(Include = "Id,Miktar,Tarih,Iade,Kullanici_Id,Urun_Id")] Siparis siparis)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(siparis).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Genel","TumSiparisler");
+            }
             ViewBag.Kullanici_Id = new SelectList(db.Users, "Id", "AdSoyad", siparis.Kullanici_Id);
             ViewBag.Urun_Id = new SelectList(db.Urun, "Id", "Adi", siparis.Urun_Id);
             return View(siparis);

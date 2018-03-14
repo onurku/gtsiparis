@@ -17,8 +17,7 @@ namespace gtsiparis.Controllers
         // GET: Lokasyon
         public ActionResult Index()
         {
-            var lokasyon = db.Lokasyon.Include(l => l.IL).Include(l => l.Rol);
-            return View(lokasyon.ToList());
+            return View(db.Lokasyon.ToList());
         }
 
         // GET: Lokasyon/Details/5
@@ -39,8 +38,6 @@ namespace gtsiparis.Controllers
         // GET: Lokasyon/Create
         public ActionResult Create()
         {
-            ViewBag.IL_Id = new SelectList(db.IL, "Id", "ILAdi");
-            ViewBag.Rol_Id = new SelectList(db.Rol, "Id", "RolAdi");
             return View();
         }
 
@@ -49,7 +46,7 @@ namespace gtsiparis.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,LokasyonAdi,Rol_Id,IL_Id")] Lokasyon lokasyon)
+        public ActionResult Create([Bind(Include = "Id,Il,Ilce,SemtBelde,Mahalle,PostaKodu")] Lokasyon lokasyon)
         {
             if (ModelState.IsValid)
             {
@@ -58,8 +55,6 @@ namespace gtsiparis.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IL_Id = new SelectList(db.IL, "Id", "ILAdi", lokasyon.IL_Id);
-            ViewBag.Rol_Id = new SelectList(db.Rol, "Id", "RolAdi", lokasyon.Rol_Id);
             return View(lokasyon);
         }
 
@@ -75,8 +70,6 @@ namespace gtsiparis.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.IL_Id = new SelectList(db.IL, "Id", "ILAdi", lokasyon.IL_Id);
-            ViewBag.Rol_Id = new SelectList(db.Rol, "Id", "RolAdi", lokasyon.Rol_Id);
             return View(lokasyon);
         }
 
@@ -85,7 +78,7 @@ namespace gtsiparis.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,LokasyonAdi,Rol_Id,IL_Id")] Lokasyon lokasyon)
+        public ActionResult Edit([Bind(Include = "Id,Il,Ilce,SemtBelde,Mahalle,PostaKodu")] Lokasyon lokasyon)
         {
             if (ModelState.IsValid)
             {
@@ -93,8 +86,6 @@ namespace gtsiparis.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IL_Id = new SelectList(db.IL, "Id", "ILAdi", lokasyon.IL_Id);
-            ViewBag.Rol_Id = new SelectList(db.Rol, "Id", "RolAdi", lokasyon.Rol_Id);
             return View(lokasyon);
         }
 
@@ -131,6 +122,20 @@ namespace gtsiparis.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+
+
+        // Lokasyon seçilimi
+        public ActionResult LokasyonSec()
+        {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "Account");
+
+            IEnumerable<Lokasyon> LokasyonListesi;
+            LokasyonListesi = (from b in db.Lokasyon  select b).ToList();
+
+            return View();
         }
     }
 }

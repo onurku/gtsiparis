@@ -5,9 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
+<h2>Sipariş Siliniyor. </h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Siparişi Silmek İstediğinize Emin misiniz ? </h3>
 <div>
     <h4>Siparis</h4>
     <hr />
@@ -45,14 +45,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Onay)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Onay)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Iade)
         </dt>
 
@@ -67,7 +59,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Listeye Geri Dön", "Index")
         </div>
     }
 </div>

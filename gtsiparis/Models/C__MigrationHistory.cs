@@ -6,7 +6,7 @@ namespace gtsiparis
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("gtadmin.__MigrationHistory")]
+    
     public partial class C__MigrationHistory
     {
         [Key]

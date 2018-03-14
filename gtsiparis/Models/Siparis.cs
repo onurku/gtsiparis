@@ -23,8 +23,6 @@
         [Column(TypeName = "datetime2")]
         public DateTime Tarih { get; set; }
 
-        public bool Onay { get; set; }
-
         [DisplayName("İade Edildi mi?")]
         public bool Iade { get; set; }
 
@@ -32,15 +30,8 @@
         public string Kullanici_Id { get; set; }
         public virtual ApplicationUser Kullanici { get; set; }
 
-        [DisplayName("Onaylayan Kullanıcı")]
-        public string OnayKullaniciId { get; set; }
-        public virtual ApplicationUser Onaylayan { get; set; }
-
         [DisplayName("Ürün")]
-        public int? Urun_Id { get; set; }
-
-        
-
+        public int? Urun_Id { get; set; } 
       
         public virtual Urun Urun { get; set; }
 

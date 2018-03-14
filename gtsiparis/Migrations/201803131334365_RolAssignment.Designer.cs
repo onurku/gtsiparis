@@ -7,13 +7,13 @@ namespace gtsiparis.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class UserNickField : IMigrationMetadata
+    public sealed partial class RolAssignment : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UserNickField));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(RolAssignment));
         
         string IMigrationMetadata.Id
         {
-            get { return "201803090854479_UserNickField"; }
+            get { return "201803131334365_RolAssignment"; }
         }
         
         string IMigrationMetadata.Source

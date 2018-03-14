@@ -72,7 +72,7 @@ namespace gtsiparis.Models
         [Display(Name = "Soyadi")]
         public string Soyadi { get; set; }
 
-        [Required]
+        
         [Display(Name = "Kullanici Adi")]
         public string UserNick { get; set; }
 
@@ -95,6 +95,18 @@ namespace gtsiparis.Models
         [Display(Name = "Tekrar Parola")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "WebAdmin")]
+        public bool? WebAdmin { get; set; }
+
+        [Display(Name = "Türetici")]
+        public bool? Turetici { get; set; }
+
+        [Display(Name = "Grup Admin")]
+        public bool? GrupAdmin { get; set; }
+
+        [Display(Name = "Üretici")]
+        public bool? Uretici { get; set; }
     }
 
     public class ResetPasswordViewModel

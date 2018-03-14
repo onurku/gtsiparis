@@ -40,7 +40,7 @@
         <td>
             @Html.TextBox("SipMik" + item.Id ,(decimal)item.Miktar, htmlAttributes: new { @class = "form-control textw", @id = "SipMik" + item.Id })
         </td>
-        <td><span class="input-group-addon" id="basic-addon1" style="width:60px">@Html.DisplayFor(modelItem => item.Urun.Birim.BirimAdi)</span>
+        <td>@Html.DisplayFor(modelItem => item.Urun.Birim.BirimAdi)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.BirimFiyat) ₺

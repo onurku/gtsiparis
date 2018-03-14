@@ -10,29 +10,23 @@
     [Table("gtadmin.Lokasyon")]
     public partial class Lokasyon
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Lokasyon()
-        {
-            Grup = new HashSet<Grup>();
-            Kategori = new HashSet<Kategori>();
-        }
-
+        [Key]
         public int Id { get; set; }
-        [DisplayName("Adı")]
-        public string LokasyonAdi { get; set; }
-        [DisplayName("Rolü")]
-        public int? Rol_Id { get; set; }
+
         [DisplayName("İl")]
-        public int? IL_Id { get; set; }
+        public string Il { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Grup> Grup { get; set; }
+        [DisplayName("İlçe")]
+        public string Ilce { get; set; }
 
-        public virtual IL IL { get; set; }
+        [DisplayName("Semt/Bucak/Belde")]
+        public string SemtBelde { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Kategori> Kategori { get; set; }
+        [DisplayName("Mahalle")]
+        public string Mahalle { get; set; }
 
-        public virtual Rol Rol { get; set; }
+        [DisplayName("Posta Kodu")]
+        public string PostaKodu { get; set; }
+
     }
 }
